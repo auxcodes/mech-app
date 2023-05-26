@@ -1,3 +1,5 @@
+import { functionUrl } from "./environment.js";
+
 const authError = { email: "", error: "" };
 
 export async function authUser(loginData) {
