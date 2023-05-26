@@ -2,16 +2,13 @@ const authError = { email: "", error: "" };
 
 export async function authUser(loginData) {
   let result = null;
-  const jobsRequest = await fetch(
-    "http://localhost:8888/.netlify/functions/auth",
-    {
-      method: "POST",
-      body: JSON.stringify(loginData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  const jobsRequest = await fetch(functionUrl() + "/auth", {
+    method: "POST",
+    body: JSON.stringify(loginData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
       //console.log("Auth Request successful!");
