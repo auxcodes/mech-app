@@ -91,7 +91,7 @@ function filterStaff(staffList) {
   //console.log("DC - Filter staff: ", staffList);
   const mechs = staffList
     .filter((staff) => isMechanic(staff))
-    .sort((a, b) => a.orderIndex > b.orderIndex);
+    .sort((a, b) => a.orderIndex - b.orderIndex);
   const mechList = mechs.map((mech) => {
     return {
       displayName: mech.displayName,
