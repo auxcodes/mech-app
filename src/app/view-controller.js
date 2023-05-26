@@ -14,6 +14,7 @@ import {
   mechanicName,
   refreshData,
 } from "./data-controller.js";
+import { onLoginClicked } from "./event-controller.js";
 
 const root = document.querySelector(":root");
 const loginContainer = document.querySelector("#loginContainer");
@@ -32,6 +33,10 @@ export async function loginView(formData) {
     if (formData.error.length > 0) {
       toggleLoginError(1);
     }
+    loginFormElement.onsubmit = (event) => {
+      event.preventDefault();
+      onLoginClicked(event.target["uname"].value, event.target["pword"].value);
+    };
     const headerText = "Sign-In Required";
     loginContainer.append(createHeader({ headerText: headerText }));
     loginContainer.append(loginFormElement);
