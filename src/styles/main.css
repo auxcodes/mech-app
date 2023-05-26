@@ -18,7 +18,7 @@ html {
 body {
   background-color: #f6f6f6;
   overflow: scroll;
-  height: 100vh;
+  height: 100%;
 }
 main {
   display: flex;
