@@ -44,7 +44,7 @@ function onLoginClicked(username, password) {
       } else {
         loginView({
           email: username,
-          error: "Login was unsuccessful",
+          error: "Login was unsuccessful!",
           opacity: 1,
         });
       }
