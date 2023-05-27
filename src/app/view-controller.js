@@ -38,8 +38,11 @@ export async function loginView(formData) {
       onLoginClicked(event.target["uname"].value, event.target["pword"].value);
     };
     const headerText = "Sign-In Required";
-    loginContainer.append(createHeader({ headerText: headerText }));
-    loginContainer.append(loginFormElement);
+    const loginFormContent = document.createElement("div");
+    loginFormContent.classList.add("login-form--content");
+    loginFormContent.append(createHeader({ headerText: headerText }));
+    loginFormContent.append(loginFormElement);
+    loginContainer.append(loginFormContent);
   } catch (error) {
     console.error("VC - Error creating login form: ", error);
   }
@@ -64,8 +67,11 @@ export function generateMechanicList(requestData) {
 
       mechViewElement.resultLoading = {};
       const headerText = shopName() + " Mechanics";
-      mechListContainer.append(createHeader({ headerText: headerText }));
-      mechListContainer.append(mechViewElement);
+      const mechViewContent = document.createElement("div");
+      mechViewContent.classList.add("mechanic-list--content");
+      mechListContainer.append(mechViewContent);
+      mechViewContent.append(createHeader({ headerText: headerText }));
+      mechViewContent.append(mechViewElement);
     })
     .catch((error) => console.error("Error generating mech list: ", error));
 }
@@ -89,15 +95,18 @@ export function generateJobsList(selectedMechanic) {
   }
 
   jobViewElement.resultLoading = {};
+  const jobListContent = document.createElement("div");
+  jobListContent.classList.add("job-list--content");
+  jobListContainer.append(jobListContent);
   const headerText = mechanicName(selectedMechanic) + "'s Services";
-  jobListContainer.append(
+  jobListContent.append(
     createHeader({
       headerText: headerText,
       buttonParams: { bid: "mechs", text: "Mechs" },
       refresh: { rid: "jobs", mid: selectedMechanic },
     })
   );
-  jobListContainer.append(jobViewElement);
+  jobListContent.append(jobViewElement);
 }
 
 export function generateJobDetail(selectedJob) {
@@ -119,23 +128,29 @@ export function generateJobDetail(selectedJob) {
       jobDetailViewElement.classList.add("job-detail-view");
       jobData["serviceItems"] = serviceItems(siData, totals);
       jobDetailViewElement.jobDetail = jobData;
-      jobDetailContainer.append(
+      const jobDetailContent = document.createElement("div");
+      jobDetailContent.classList.add("job-detail--content");
+      jobDetailContainer.append(jobDetailContent);
+      jobDetailContent.append(
         createHeader({
           headerText: "Service Information",
           buttonParams: { bid: "jobs", text: "Jobs" },
         })
       );
-      jobDetailContainer.append(jobDetailViewElement);
+      jobDetailContent.append(jobDetailViewElement);
     })
     .catch((error) => {
       console.error("VC - Error generating job detail", error);
-      jobDetailContainer.append(
+      const jobDetailContent = document.createElement("div");
+      jobDetailContent.classList.add("job-detail--content");
+      jobDetailContent.append(
         createHeader({
           headerText: "No Service Data",
           buttonParams: { bid: "jobs", text: "Jobs" },
         })
       );
-      jobDetailContainer.append("Error retreiving service information.");
+      jobDetailContent.append("Error retreiving service information.");
+      jobDetailContainer.append(jobDetailContent);
     });
 }
 
@@ -182,19 +197,19 @@ function createRefreshButton(params) {
 }
 
 export function toggleLogin() {
-  loginContainer.classList.toggle("hide-view");
+  loginContainer.classList.toggle("display");
 }
 
 export function toggleMechanicButtons() {
-  mechListContainer.classList.toggle("hide-view");
+  mechListContainer.classList.toggle("display");
 }
 
 export function toggleJobList() {
-  jobListContainer.classList.toggle("hide-view");
+  jobListContainer.classList.toggle("display");
 }
 
 export function toggleJobDetail() {
-  jobDetailContainer.classList.toggle("hide-view");
+  jobDetailContainer.classList.toggle("display");
 }
 
 export function toggleViewPassword() {

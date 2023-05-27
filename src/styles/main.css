@@ -20,9 +20,10 @@ body {
   overflow: scroll;
   height: 100%;
 }
+
 main {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .hide-view {
@@ -31,9 +32,30 @@ main {
   transition: all ease 0.3s;
 }
 
+.display {
+  transform: translate3d(0, 0, 0) !important;
+}
+
 .mechanic-btn-container {
+  -webkit-transform: translate3d(0, -200%, 0);
+  transform: translate3d(0, -200%, 0);
+}
+
+.mechanic-list--content {
   margin: auto;
   padding: 1em 2em;
+  width: 95%;
+  max-width: 302px;
+  position: relative;
+}
+
+section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  -webkit-transition: transform 0.45s ease-in-out;
+  transition: transform 0.45s ease-in-out;
 }
 
 .section-header {
@@ -96,6 +118,11 @@ mechanic-button {
 } */
 
 .job-list-container {
+  -webkit-transform: translate3d(0, 200%, 0);
+  transform: translate3d(0, 200%, 0);
+}
+
+.job-list--content {
   margin: auto;
   padding-top: 1em;
   width: 95%;
@@ -115,7 +142,7 @@ mechanic-button {
   box-shadow: 0 6px 7px #4646462e;
   width: 100%;
   overflow: hidden;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #e4e4e4;
   border-radius: 0.5em;
   background-color: #ffffff;
   cursor: pointer;
@@ -130,6 +157,11 @@ mechanic-button {
 }
 
 .job-detail-container {
+  -webkit-transform: translate3d(200%, 0, 0);
+  transform: translate3d(200%, 0, 0);
+}
+
+.job-detail--content {
   margin: auto;
   padding-top: 1em;
   width: 95%;
@@ -205,8 +237,13 @@ mechanic-button {
   border-top: 1px solid #d1d1d1;
 }
 
-.jobdetail-view {
-  padding: 0.5em 0 0 0;
+.job-detail-view {
+  box-shadow: 0 6px 7px #4646462e;
+  width: 100%;
+  border-radius: 0.5em;
+  background-color: #f9f9f9;
+  display: block;
+  padding: 1em 0 2em 0;
 }
 
 .back-button {
@@ -214,45 +251,54 @@ mechanic-button {
   left: 0;
   top: 0.75em;
   padding: 0;
-  border: none;
   background-image: url(../assets/arrow_back.svg);
-  background-position: 0.5em 0em;
+  background-position: 0.33em 0em;
   background-color: transparent;
   border-radius: 2em;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 2em;
-  height: 2em;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.back-button:active {
-  box-shadow: inset 0 3px 3px #00000078;
-}
-
-.refresh-button {
-  position: absolute;
-  right: 0em;
-  top: 0.55em;
-  padding: 0;
-  border: none;
-  border-radius: 2em;
-  background-image: url(../assets/refresh.svg);
-  background-color: transparent;
+  border: 3px solid transparent;
+  box-shadow: 0 7px 10px #4646462e;
   background-size: contain;
   background-repeat: no-repeat;
   width: 2.25em;
   height: 2.25em;
   font-size: 1em;
   cursor: pointer;
+  transition: box-shadow ease 0.3s;
+}
+
+.back-button:active {
+  box-shadow: none;
+}
+
+.refresh-button {
+  position: absolute;
+  right: 0em;
+  top: 0.75em;
+  padding: 0;
+  border-radius: 2em;
+  background-image: url(../assets/refresh.svg);
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 3px solid transparent;
+  box-shadow: 0 7px 10px #4646462e;
+  width: 2.25em;
+  height: 2.25em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: box-shadow ease 0.3s;
 }
 
 .refresh-button:active {
-  box-shadow: inset 0 3px 3px #00000078;
+  box-shadow: none;
 }
 
 .login-form-container {
+  -webkit-transform: translate3d(-200%, 0, 0);
+  transform: translate3d(-200%, 0, 0);
+}
+
+.login-form--content {
   margin: 20vh auto auto auto;
   width: 85%;
   max-width: 350px;
@@ -260,9 +306,6 @@ mechanic-button {
 }
 
 .login-form {
-}
-
-.login-form-content {
   display: flex;
   flex-direction: column;
   margin-top: 2em;
