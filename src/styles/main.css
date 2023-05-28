@@ -17,7 +17,6 @@ html {
 
 body {
   background-color: #f6f6f6;
-  overflow: scroll;
   height: 100%;
 }
 
@@ -56,6 +55,7 @@ section {
   z-index: 0;
   -webkit-transition: transform 0.45s ease-in-out;
   transition: transform 0.45s ease-in-out;
+  overflow: scroll;
 }
 
 .section-header {
@@ -196,6 +196,7 @@ mechanic-button {
 }
 
 .booking-comments {
+  white-space: pre-wrap;
   background-color: #fff;
   border: 1px solid #d1d1d1;
   border-radius: 0.3em;

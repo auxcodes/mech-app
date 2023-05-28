@@ -49,6 +49,7 @@ export async function loginView(formData) {
 }
 
 export function generateMechanicList(requestData) {
+  mechListContainer.innerHTML = "";
   getMechanics(requestData)
     .then((mechanicsList) => {
       const mechViewElement = document.createElement("ul");
@@ -126,10 +127,13 @@ export function generateJobDetail(selectedJob) {
       const jobDetailViewElement = document.createElement("job-detail-view");
       jobDetailViewElement.id = "jobDetailView";
       jobDetailViewElement.classList.add("job-detail-view");
+
       jobData["serviceItems"] = serviceItems(siData, totals);
       jobDetailViewElement.jobDetail = jobData;
+
       const jobDetailContent = document.createElement("div");
       jobDetailContent.classList.add("job-detail--content");
+
       jobDetailContainer.append(jobDetailContent);
       jobDetailContent.append(
         createHeader({
@@ -223,6 +227,13 @@ export function toggleViewPassword() {
   viewPasswordElements.input.type = typeCompare(
     viewPasswordElements.input.type
   );
+}
+
+export function resetSite() {
+  mechListContainer.classList.remove("display");
+  jobDetailContainer.classList.remove("display");
+  jobDetailContainer.classList.remove("display");
+  loginContainer.classList.toggle("display");
 }
 
 export function toggleLoginError(opacity) {

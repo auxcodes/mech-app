@@ -10,6 +10,7 @@ import {
   toggleViewPassword,
   refreshJobList,
   toggleLoginError,
+  resetSite,
 } from "./view-controller.js";
 
 import { authUser } from "./user-auth.js";
@@ -65,4 +66,13 @@ export function onRefreshClicked(refreshParam) {
 
 export function onViewPassword() {
   toggleViewPassword();
+}
+
+export function onSessionExpired() {
+  loginView({
+    email: "",
+    error: "Session Expired, login in again.",
+    opacity: 1,
+  });
+  resetSite();
 }

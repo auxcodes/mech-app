@@ -1,3 +1,4 @@
+import { onSessionExpired } from "./event-controller.js";
 import { shopData, jobDetail } from "./online-data.js";
 
 const shopInfo = { shopName: "" };
@@ -67,11 +68,20 @@ export async function getJobDetailData(jobGuid) {
   displayedJob["data"] = {};
   await jobDetail(jobGuid)
     .then((response) => {
+      if (response["serviceData"]["resultsData"]) {
+        const message = response["serviceData"]["resultsData"]["message"];
+        const logBackIn = message.includes("Session Token invalid");
+        console.log("Message: ", logBackIn);
+        onSessionExpired();
+        return;
+      }
       displayedJob["data"] = response["serviceData"];
       //console.log("DC - displayedJob: ", displayedJob["data"]);
-      displayedJob["data"]["siTotal"] = serviceItemsTotal(
-        response["serviceData"]["serviceItems"]
-      );
+      if (response["serviceData"]["serviceItems"]) {
+        displayedJob["data"]["siTotal"] = serviceItemsTotal(
+          response["serviceData"]["serviceItems"]
+        );
+      }
     })
     .catch((error) =>
       console.error("DC - Get job detail request failed", error)
