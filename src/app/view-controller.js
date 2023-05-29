@@ -1,7 +1,7 @@
 import {} from "./components/login-form.js";
 import {} from "./components/mechanic-button.js";
 import {} from "./components/job-card.js";
-import {} from "./job-detail-view.js";
+import {} from "./views/job-detail-view.js";
 import {} from "./components/service-item.js";
 import {} from "./components/section-header.js";
 import {} from "./components/back-button.js";
@@ -50,12 +50,17 @@ export async function loginView(formData) {
 
 export function generateMechanicList(requestData) {
   mechListContainer.innerHTML = "";
+  const mechViewElement = document.createElement("ul");
+  mechViewElement.id = "mechanicListView";
+  mechViewElement.classList.add("mechanics-view");
+  mechViewElement.resultLoading = {};
+  const mechViewContent = document.createElement("div");
+  mechViewContent.classList.add("mechanic-list--content");
+  mechViewContent.append(createHeader({ headerText: "Loading..." }));
+  mechViewContent.append(mechViewElement);
+
   getMechanics(requestData)
     .then((mechanicsList) => {
-      const mechViewElement = document.createElement("ul");
-      mechViewElement.id = "mechanicListView";
-      mechViewElement.classList.add("mechanics-view");
-
       if (mechanicsList.length > 0) {
         mechanicsList.forEach((mech) => {
           const li = document.createElement("li");
@@ -66,7 +71,7 @@ export function generateMechanicList(requestData) {
         });
       }
 
-      mechViewElement.resultLoading = {};
+      // mechViewElement.resultLoading = {};
       const headerText = shopName() + " Mechanics";
       const mechViewContent = document.createElement("div");
       mechViewContent.classList.add("mechanic-list--content");
@@ -112,6 +117,12 @@ export function generateJobsList(selectedMechanic) {
 
 export function generateJobDetail(selectedJob) {
   jobDetailContainer.innerHTML = "";
+  const jobDetailViewElement = document.createElement("job-detail-view");
+  jobDetailViewElement.id = "jobDetailView";
+  jobDetailViewElement.classList.add("job-detail-view");
+  const jobDetailContent = document.createElement("div");
+  jobDetailContent.classList.add("job-detail--content");
+
   getJobDetailData(selectedJob)
     .then((data) => {
       const jobData = data;
@@ -124,16 +135,8 @@ export function generateJobDetail(selectedJob) {
       };
       siData.push(totals);
 
-      const jobDetailViewElement = document.createElement("job-detail-view");
-      jobDetailViewElement.id = "jobDetailView";
-      jobDetailViewElement.classList.add("job-detail-view");
-
       jobData["serviceItems"] = serviceItems(siData, totals);
       jobDetailViewElement.jobDetail = jobData;
-
-      const jobDetailContent = document.createElement("div");
-      jobDetailContent.classList.add("job-detail--content");
-
       jobDetailContainer.append(jobDetailContent);
       jobDetailContent.append(
         createHeader({
@@ -176,7 +179,7 @@ function serviceItems(items, totals) {
   return itemList;
 }
 
-function createHeader(params) {
+export function createHeader(params) {
   const el = document.createElement("section-header");
   el.headerText = params.headerText;
   if (params.buttonParams) {
