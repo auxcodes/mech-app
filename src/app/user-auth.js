@@ -15,7 +15,7 @@ export async function authUser(loginData) {
     .then((data) => {
       //console.log("Auth Request successful!");
       authError.error = "";
-      result = data["shopParams"];
+      result = data["data"];
     })
     .catch((error) => {
       console.error("Job request failed", error);

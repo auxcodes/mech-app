@@ -41,7 +41,16 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({
               msg: "Shop data request successful!",
               error: "errors",
-              shopParams: response,
+              data: response,
+              // data: {
+              //   responseId: "A319A69088A10EABCE9F751",
+              //   inResponseToId: "63b1ed4f7bc7a434ed83",
+              //   status: "error",
+              //   timeStamp: "1685314115",
+              //   resultsData: {
+              //     message: "Session Token invalid, please login again.",
+              //   },
+              // },
             }),
           });
         })

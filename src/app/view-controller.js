@@ -231,7 +231,7 @@ export function toggleViewPassword() {
 
 export function resetSite() {
   mechListContainer.classList.remove("display");
-  jobDetailContainer.classList.remove("display");
+  jobListContainer.classList.remove("display");
   jobDetailContainer.classList.remove("display");
   loginContainer.classList.toggle("display");
 }

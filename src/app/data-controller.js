@@ -13,10 +13,14 @@ export async function getMechanics(requestData) {
   request["data"] = requestData;
   if (mechanics.data.length === 0) {
     await shopData(requestData)
-      .then((result) => {
-        if (result["shopParams"] !== undefined) {
-          //console.log("DC - getMechanics - shopData", result["msg"]);
-          const shopData = result["shopParams"];
+      .then((response) => {
+        if (validSession(response)) {
+          onSessionExpired();
+          return;
+        }
+        if (response["data"] !== undefined) {
+          //console.log("DC - getMechanics - shopData", response["msg"]);
+          const shopData = response["data"];
           //console.log("DC - Shop data: ", shopData);
           shopInfo["shopName"] = shopData["shopName"];
           filterStaff(Object.values(shopData["mechanics"]));
@@ -41,8 +45,12 @@ export async function getMechanics(requestData) {
 
 export async function refreshData() {
   await shopData(request["data"])
-    .then((result) => {
-      const shopData = result["shopParams"];
+    .then((response) => {
+      if (validSession(response)) {
+        onSessionExpired();
+        return;
+      }
+      const shopData = response["data"];
       shopInfo["shopName"] = shopData["shopName"];
       filterStaff(Object.values(shopData["mechanics"]));
       allJobs["data"] = Object.values(shopData["jobsList"]);
@@ -68,18 +76,15 @@ export async function getJobDetailData(jobGuid) {
   displayedJob["data"] = {};
   await jobDetail(jobGuid)
     .then((response) => {
-      if (response["serviceData"]["resultsData"]) {
-        const message = response["serviceData"]["resultsData"]["message"];
-        const logBackIn = message.includes("Session Token invalid");
-        console.log("Message: ", logBackIn);
+      if (validSession(response)) {
         onSessionExpired();
         return;
       }
-      displayedJob["data"] = response["serviceData"];
+      displayedJob["data"] = response["data"];
       //console.log("DC - displayedJob: ", displayedJob["data"]);
-      if (response["serviceData"]["serviceItems"]) {
+      if (response["data"]["serviceItems"]) {
         displayedJob["data"]["siTotal"] = serviceItemsTotal(
-          response["serviceData"]["serviceItems"]
+          response["data"]["serviceItems"]
         );
       }
     })
@@ -97,25 +102,42 @@ export function mechanicName(mechId) {
   return mechanics["data"].find((mech) => mech.guid === mechId)["firstName"];
 }
 
+function validSession(sessionData) {
+  let sessionExpired = false;
+  console.log("Valid Session check: ", sessionData);
+  if (sessionData["data"]["resultsData"]) {
+    const message = sessionData["data"]["resultsData"]["message"];
+    sessionExpired = message.includes("Session Token invalid");
+    console.log("SessionExpired: ", sessionExpired);
+  }
+  return sessionExpired;
+}
+
 function filterStaff(staffList) {
   //console.log("DC - Filter staff: ", staffList);
   const mechs = staffList
     .filter((staff) => isMechanic(staff))
     .sort((a, b) => a.orderIndex - b.orderIndex);
   const mechList = mechs.map((mech) => {
-    return {
+    const mechDetails = {
       displayName: mech.displayName,
       displayColor: mech.displayColor,
       firstName: mech.firstName,
       guid: mech.guid,
     };
+    if (mech.jobTitle === "1") {
+      mechDetails["displayName"] = "Unassigned";
+      mechDetails["firstName"] = "Unassigned";
+    }
+    return mechDetails;
   });
   mechanics["data"] = mechList;
 }
 
 function isMechanic(staffMember) {
   return (
-    (staffMember.jobTitle === "Mechanic" ||
+    (staffMember.jobTitle === "1" ||
+      staffMember.jobTitle === "Mechanic" ||
       staffMember.jobTitle === "WTL" ||
       staffMember.firstName === "Jenna") &&
     staffMember.showAsMechanic === "1"

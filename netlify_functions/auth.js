@@ -67,7 +67,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify({
               msg: "Validation Successful",
               error: "errors",
-              shopParams: response,
+              data: response,
             }),
           });
         })
@@ -128,8 +128,6 @@ async function login() {
     return error;
   }
 }
-
-async function shopData() {}
 
 function setShopDataParams(responseData) {
   const resultsData = responseData["response"]["resultsData"];
