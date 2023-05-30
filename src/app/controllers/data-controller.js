@@ -1,5 +1,5 @@
 import { onSessionExpired } from "./event-controller.js";
-import { shopData, jobDetail } from "./online-data.js";
+import { shopData, jobDetail } from "../online-data.js";
 
 const shopInfo = { shopName: "" };
 const mechanics = { data: [] };
@@ -29,16 +29,24 @@ export async function getMechanics(requestData) {
           mechanics.data = [
             {
               displayName: "Error Occured",
-              displayColor: "#ffffff",
+              displayColor: "#bc0000",
               firstName: "Error",
               guid: "0",
             },
           ];
         }
       })
-      .catch((error) =>
-        console.error("DC - Get shopData request failed", error)
-      );
+      .catch((error) => {
+        console.error("DC - Get shopData request failed", error);
+        mechanics.data = [
+          {
+            displayName: "Error Occured",
+            displayColor: "#bc0000",
+            firstName: "Error Occured",
+            guid: "0",
+          },
+        ];
+      });
   }
   return mechanics.data;
 }

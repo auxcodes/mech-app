@@ -13,7 +13,7 @@ import {
   resetSite,
 } from "./view-controller.js";
 
-import { authUser } from "./user-auth.js";
+import { authUser } from "../user-auth.js";
 
 export function onLoginClicked(username, password) {
   const loginData = { email: username, password: password };

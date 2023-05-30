@@ -13,7 +13,7 @@ export async function authUser(loginData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      //console.log("Auth Request successful!");
+      console.log("Auth Request successful!", data);
       authError.error = "";
       result = data["data"];
     })

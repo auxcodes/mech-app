@@ -1,4 +1,5 @@
 import { createHeader } from "./view-controller.js";
+import {} from "../views/mechanic-list-view.js";
 
 const mechListContainer = document.querySelector("#mechanicsListContainer");
 const mechListElements = {
@@ -6,23 +7,21 @@ const mechListElements = {
   header: {},
   viewElement: {},
 };
+const loadingData = [
+  {
+    guid: 0,
+    displayColor: "#d2d2d2",
+    firstName: "Loading...",
+  },
+];
 
 export function createMechanicListView() {
   mechListContainer.innerHTML = "";
 
-  const mechViewElement = document.createElement("ul");
+  const mechViewElement = document.createElement("mechanic-list-view");
   mechViewElement.id = "mechanicListView";
   mechViewElement.classList.add("mechanics-view");
-
-  const li = document.createElement("li");
-  const button = document.createElement("mechanic-button");
-  button.mechButton = {
-    guid: 0,
-    displayColor: "#d2d2d2",
-    firstName: "Loading...",
-  };
-  li.append(button);
-  mechViewElement.append(li);
+  mechViewElement.mechanics = loadingData;
 
   const mechViewContent = document.createElement("div");
   mechViewContent.classList.add("mechanic-list--content");
@@ -36,8 +35,7 @@ export function createMechanicListView() {
   mechViewContent.append(mechViewElement);
 }
 
-export function updateMechanicListView() {
-  //   mechListElements["viewElement"] = mechViewElement;
-  //   mechListElements["content"] = mechViewContent;
-  mechListElements["header"].headerText = { headerText: "New Text" };
+export function updateMechanicListView(viewData) {
+  mechListElements["header"].headerText = viewData["headerText"];
+  mechListElements["viewElement"].mechanics = viewData["mechanicList"];
 }

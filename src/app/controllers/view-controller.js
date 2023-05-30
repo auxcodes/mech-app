@@ -1,11 +1,11 @@
-import {} from "./components/login-form.js";
-import {} from "./components/mechanic-button.js";
-import {} from "./components/job-card.js";
-import {} from "./views/job-detail-view.js";
-import {} from "./components/service-item.js";
-import {} from "./components/section-header.js";
-import {} from "./components/back-button.js";
-import {} from "./components/refresh-button.js";
+import {} from "../components/login-form.js";
+import {} from "../components/mechanic-button.js";
+import {} from "../components/job-card.js";
+import {} from "../views/job-detail-view.js";
+import {} from "../components/service-item.js";
+import {} from "../components/section-header.js";
+import {} from "../components/back-button.js";
+import {} from "../components/refresh-button.js";
 import {
   getMechanics,
   getJobs,
@@ -15,6 +15,14 @@ import {
   refreshData,
 } from "./data-controller.js";
 import { onLoginClicked } from "./event-controller.js";
+import {
+  createMechanicListView,
+  updateMechanicListView,
+} from "./mechanics-view-controller.js";
+import {
+  createJobDetailView,
+  updateJobDetailView,
+} from "./detail-view-controller.js";
 
 const root = document.querySelector(":root");
 const loginContainer = document.querySelector("#loginContainer");
@@ -49,37 +57,31 @@ export async function loginView(formData) {
 }
 
 export function generateMechanicList(requestData) {
-  mechListContainer.innerHTML = "";
-  const mechViewElement = document.createElement("ul");
-  mechViewElement.id = "mechanicListView";
-  mechViewElement.classList.add("mechanics-view");
-  mechViewElement.resultLoading = {};
-  const mechViewContent = document.createElement("div");
-  mechViewContent.classList.add("mechanic-list--content");
-  mechViewContent.append(createHeader({ headerText: "Loading..." }));
-  mechViewContent.append(mechViewElement);
+  createMechanicListView();
 
   getMechanics(requestData)
     .then((mechanicsList) => {
-      if (mechanicsList.length > 0) {
-        mechanicsList.forEach((mech) => {
-          const li = document.createElement("li");
-          const button = document.createElement("mechanic-button");
-          button.mechButton = mech;
-          li.append(button);
-          mechViewElement.append(li);
-        });
-      }
-
-      // mechViewElement.resultLoading = {};
       const headerText = shopName() + " Mechanics";
-      const mechViewContent = document.createElement("div");
-      mechViewContent.classList.add("mechanic-list--content");
-      mechListContainer.append(mechViewContent);
-      mechViewContent.append(createHeader({ headerText: headerText }));
-      mechViewContent.append(mechViewElement);
+      const mechanicViewData = {
+        headerText: headerText,
+        mechanicList: mechanicsList.length > 0 ? mechanicsList : [],
+      };
+      updateMechanicListView(mechanicViewData);
     })
-    .catch((error) => console.error("Error generating mech list: ", error));
+    .catch((error) => {
+      console.error("Error generating mech list: ", error);
+      const mechanicViewData = {
+        headerText: "Error",
+        mechanicList: [
+          {
+            guid: 0,
+            displayColor: "#bc0000",
+            firstName: "Data Error",
+          },
+        ],
+      };
+      updateMechanicListView(mechanicViewData);
+    });
 }
 
 export function generateJobsList(selectedMechanic) {
@@ -116,12 +118,7 @@ export function generateJobsList(selectedMechanic) {
 }
 
 export function generateJobDetail(selectedJob) {
-  jobDetailContainer.innerHTML = "";
-  const jobDetailViewElement = document.createElement("job-detail-view");
-  jobDetailViewElement.id = "jobDetailView";
-  jobDetailViewElement.classList.add("job-detail-view");
-  const jobDetailContent = document.createElement("div");
-  jobDetailContent.classList.add("job-detail--content");
+  createJobDetailView();
 
   getJobDetailData(selectedJob)
     .then((data) => {
@@ -136,28 +133,21 @@ export function generateJobDetail(selectedJob) {
       siData.push(totals);
 
       jobData["serviceItems"] = serviceItems(siData, totals);
-      jobDetailViewElement.jobDetail = jobData;
-      jobDetailContainer.append(jobDetailContent);
-      jobDetailContent.append(
-        createHeader({
-          headerText: "Service Information",
-          buttonParams: { bid: "jobs", text: "Jobs" },
-        })
-      );
-      jobDetailContent.append(jobDetailViewElement);
+      const updateData = {
+        headerText: "Service Information",
+        jobDetail: jobData,
+      };
+      updateJobDetailView(updateData);
     })
     .catch((error) => {
       console.error("VC - Error generating job detail", error);
-      const jobDetailContent = document.createElement("div");
-      jobDetailContent.classList.add("job-detail--content");
-      jobDetailContent.append(
-        createHeader({
-          headerText: "No Service Data",
-          buttonParams: { bid: "jobs", text: "Jobs" },
-        })
-      );
-      jobDetailContent.append("Error retreiving service information.");
-      jobDetailContainer.append(jobDetailContent);
+      const updateData = {
+        headerText: "No Service Data",
+        jobDetail: {
+          bookingComments: "Error retreiving service information.",
+        },
+      };
+      updateJobDetailView(updateData);
     });
 }
 

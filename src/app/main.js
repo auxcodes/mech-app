@@ -5,13 +5,9 @@ import {
   onBackClicked,
   onRefreshClicked,
   onViewPassword,
-} from "./event-controller.js";
+} from "./controllers/event-controller.js";
 import { loginErrorState } from "./user-auth.js";
-import { loginView } from "./view-controller.js";
-import {
-  createMechanicListView,
-  updateMechanicListView,
-} from "./mechanics-view-controller.js";
+import { loginView } from "./controllers/view-controller.js";
 
 window.onLoginClicked = onLoginClicked;
 window.onOpenJobList = onOpenJobList;
@@ -23,10 +19,5 @@ window.onViewPassword = onViewPassword;
 loadViews();
 
 function loadViews() {
-  // loginView(loginErrorState());
-
-  createMechanicListView();
-  setTimeout(() => {
-    updateMechanicListView();
-  }, 3000);
+  loginView(loginErrorState());
 }
