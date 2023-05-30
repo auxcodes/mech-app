@@ -1,4 +1,4 @@
-import { createHeader } from "./view-controller.js";
+import { createHeader, createBackButton } from "./view-controller.js";
 import {} from "../views/job-detail-view.js";
 
 const jobDetailContainer = document.querySelector("#jobDetailContainer");
@@ -8,6 +8,7 @@ const jobDetailElements = {
   viewElement: {},
 };
 const loadingData = {
+  customerFirstName: "Customer ",
   customerLastName: "...",
   customerMobile: "...",
   tagNumber: "...",
@@ -15,7 +16,7 @@ const loadingData = {
   bikeMake: "...",
   bikeName: "...",
   bookingComments: "...",
-  serviceItems: "...",
+  serviceItems: "<div>...</div>",
 };
 
 export function createJobDetailView() {
@@ -33,7 +34,7 @@ export function createJobDetailView() {
   jobDetailElements["content"] = jobDetailContent;
   jobDetailElements["header"] = createHeader({
     headerText: "Loading...",
-    buttonParams: { bid: "jobs", text: "Jobs" },
+    backBtn: { bid: "jobs", text: "Jobs" },
   });
 
   jobDetailContainer.append(jobDetailContent);
@@ -42,6 +43,9 @@ export function createJobDetailView() {
 }
 
 export function updateJobDetailView(viewData) {
-  jobDetailElements["header"] = viewData["headerText"];
-  jobDetailElements["viewElement"] = viewData["jobDetail"];
+  jobDetailElements["viewElement"].jobDetail = viewData["jobDetail"];
+  jobDetailElements["header"].headerData = {
+    headerText: viewData["headerText"],
+    buttonList: [createBackButton({ bid: "jobs", text: "Jobs" })],
+  };
 }

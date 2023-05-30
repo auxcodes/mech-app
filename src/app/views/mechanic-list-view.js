@@ -1,7 +1,6 @@
 // Display a list of mechanics for the store
 class MechanicListView extends HTMLElement {
   set mechanics(mechList) {
-    console.log(mechList);
     this.innerHTML = `
     <ul>
       ${mechList
@@ -15,7 +14,6 @@ class MechanicListView extends HTMLElement {
         .join("")}
     </ul>
     `;
-    console.log(this.innerHTML);
   }
 }
 

@@ -112,7 +112,7 @@ export function mechanicName(mechId) {
 
 function validSession(sessionData) {
   let sessionExpired = false;
-  console.log("Valid Session check: ", sessionData);
+  //console.log("Valid Session check: ", sessionData);
   if (sessionData["data"]["resultsData"]) {
     const message = sessionData["data"]["resultsData"]["message"];
     sessionExpired = message.includes("Session Token invalid");

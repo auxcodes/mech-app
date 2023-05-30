@@ -36,6 +36,9 @@ export function createMechanicListView() {
 }
 
 export function updateMechanicListView(viewData) {
-  mechListElements["header"].headerText = viewData["headerText"];
   mechListElements["viewElement"].mechanics = viewData["mechanicList"];
+  mechListElements["header"].headerData = {
+    headerText: viewData["headerText"],
+    buttonList: [],
+  };
 }

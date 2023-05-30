@@ -110,8 +110,8 @@ export function generateJobsList(selectedMechanic) {
   jobListContent.append(
     createHeader({
       headerText: headerText,
-      buttonParams: { bid: "mechs", text: "Mechs" },
-      refresh: { rid: "jobs", mid: selectedMechanic },
+      backBtn: { bid: "mechs", text: "Mechs" },
+      refreshBtn: { rid: "jobs", mid: selectedMechanic },
     })
   );
   jobListContent.append(jobViewElement);
@@ -171,17 +171,23 @@ function serviceItems(items, totals) {
 
 export function createHeader(params) {
   const el = document.createElement("section-header");
-  el.headerText = params.headerText;
-  if (params.buttonParams) {
-    el.append(createBackButton(params.buttonParams));
+  const buttons = [];
+
+  if (params.backBtn) {
+    buttons.push(createBackButton(params.backBtn));
   }
-  if (params.refresh) {
-    el.append(createRefreshButton(params.refresh));
+  if (params.refreshBtn) {
+    buttons.push(createRefreshButton(params.refreshBtn));
   }
+
+  el.headerData = {
+    headerText: params.headerText,
+    buttonList: buttons,
+  };
   return el;
 }
 
-function createBackButton(params) {
+export function createBackButton(params) {
   const el = document.createElement("back-button");
   el.buttonConfig = params;
   return el;
