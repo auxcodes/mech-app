@@ -53,7 +53,10 @@ exports.handler = async (event, context, callback) => {
 
     try {
       if (currentCookie.length === 0) {
-        await getCookie();
+        await getCookie().catch((error) => {
+          console.log("====> Get cookie error: ", error);
+          throw new Error(`Failed to get cookie: ${error}`);
+        });
       }
       // else we already have cookie
       loginParams["email"] = body["email"];
@@ -142,20 +145,19 @@ function setShopDataParams(responseData) {
   return shopDataParams;
 }
 
-function yearMonth() {
-  const now = new Date();
-  const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  return now.getFullYear() + "-" + month + "-";
-}
-
 function firstOfMonth() {
-  return yearMonth() + "01";
+  const now = new Date();
+  const year = now.toLocaleDateString("au-EN", { year: "numeric" });
+  const month = now.toLocaleDateString("au-EN", { month: "2-digit" });
+  return `${year}-${month}-01`;
 }
 
 function todaysDate() {
   const now = new Date();
-  const day = ("0" + new Date().getDate()).slice(-2);
-  return yearMonth() + day;
+  const year = now.toLocaleDateString("au-EN", { year: "numeric" });
+  const month = now.toLocaleDateString("au-EN", { month: "2-digit" });
+  const day = now.toLocaleDateString("au-EN", { day: "2-digit" });
+  return `${year}-${month}-${day}`;
 }
 
 function requestID() {
