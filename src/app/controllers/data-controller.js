@@ -2,11 +2,11 @@ import { onSessionExpired } from "./event-controller.js";
 import { shopData, jobDetail } from "../online-data.js";
 
 const shopInfo = { shopName: "" };
+const todaysDate = { date: "" };
 const mechanics = { data: [] };
 const allJobs = { data: [] };
 const mechanicJobs = { data: [] };
 const displayedJob = { data: {} };
-const mechName = "";
 const request = { data: {} };
 
 export async function getMechanics(requestData) {
@@ -21,8 +21,9 @@ export async function getMechanics(requestData) {
         if (response["data"] !== undefined) {
           //console.log("DC - getMechanics - shopData", response["msg"]);
           const shopData = response["data"];
-          //console.log("DC - Shop data: ", shopData);
+          console.log("DC - Shop data: ", shopData);
           shopInfo["shopName"] = shopData["shopName"];
+          todaysDate["date"] = shopData[""];
           filterStaff(Object.values(shopData["mechanics"]));
           allJobs["data"] = Object.values(shopData["jobsList"]);
         } else {
@@ -104,6 +105,13 @@ export async function getJobDetailData(jobGuid) {
 
 export function shopName() {
   return shopInfo["shopName"];
+}
+
+export function currentDate(date) {
+  if (date) {
+    todaysDate["date"] = date;
+  }
+  return todaysDate["date"];
 }
 
 export function mechanicName(mechId) {

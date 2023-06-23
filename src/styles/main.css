@@ -1,5 +1,7 @@
 :root {
   --error-opacity: 0;
+  --job-status-color: #000;
+  --job-status-bgcolor: transparent;
 }
 
 * {
@@ -18,11 +20,6 @@ html {
 body {
   background-color: #f6f6f6;
   height: 100%;
-}
-
-main {
-  /* display: flex;
-  flex-direction: column; */
 }
 
 .hide-view {
@@ -149,6 +146,15 @@ mechanic-button {
   padding: 0.3em 0.3em 0 0.3em;
   row-gap: 0.3em;
   overflow: hidden;
+}
+
+.job-status {
+  color: var(--job-status-color);
+  background-color: var(--job-status-bgcolor);
+  font-weight: bold;
+  padding: 0.25em 0.5em 0 0.5em;
+  max-width: fit-content;
+  border-radius: 0.4em;
 }
 
 .job-detail-container {
