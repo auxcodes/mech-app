@@ -40,5 +40,6 @@ export function updateMechanicListView(viewData) {
   mechListElements["header"].headerData = {
     headerText: viewData["headerText"],
     buttonList: [],
+    currentDate: viewData["currentDate"],
   };
 }

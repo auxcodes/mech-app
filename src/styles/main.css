@@ -69,6 +69,15 @@ section {
   border-radius: 5em;
 }
 
+.header-date {
+  position: absolute;
+  top: 1.5em;
+  right: 0;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: monospace;
+}
+
 .mechanics-view,
 .mechanics-view ul {
   list-style: none;
@@ -102,22 +111,6 @@ mechanic-button {
 .mech-btn:hover {
   border: 2px solid var(--mech-btn-color);
 }
-
-/* .mech-btn::before {
-  content: "0";
-  position: absolute;
-  left: 0;
-  top: -14px;
-  border: 1px solid #433c3c;
-  border-radius: 0.5em 0.5em 0.3em 0.5em;
-  background-color: var(--mech-btn-color);
-  margin: 0;
-  padding: 0.5em;
-  width: 89%;
-  font-size: 1.25rem;
-  z-index: -1;
-  cursor: pointer;
-} */
 
 .job-list-container {
   -webkit-transform: translate3d(0, 200%, 0);

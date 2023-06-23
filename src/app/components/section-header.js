@@ -7,6 +7,9 @@ class SectionHeader extends HTMLElement {
             return button.innerHTML;
           })
           .join("")}
+          <div class="header-date">${
+            headerData.currentDate ? headerData.currentDate : ""
+          }</div>
         `;
   }
 }

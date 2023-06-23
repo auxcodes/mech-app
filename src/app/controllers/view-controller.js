@@ -58,12 +58,14 @@ export async function loginView(formData) {
 
 export function generateMechanicList(requestData) {
   createMechanicListView();
+  const requestDate = requestData["requestData"]["date"];
 
   getMechanics(requestData)
     .then((mechanicsList) => {
       const headerText = shopName() + " Mechanics";
       const mechanicViewData = {
         headerText: headerText,
+        currentDate: requestDate,
         mechanicList: mechanicsList.length > 0 ? mechanicsList : [],
       };
       updateMechanicListView(mechanicViewData);
