@@ -6,23 +6,11 @@ import {} from "../components/service-item.js";
 import {} from "../components/section-header.js";
 import {} from "../components/back-button.js";
 import {} from "../components/refresh-button.js";
-import {
-  getMechanics,
-  getJobs,
-  getJobDetailData,
-  shopName,
-  mechanicName,
-  refreshData,
-} from "./data-controller.js";
+import { getMechanics, getJobs, getJobDetailData, shopName, mechanicName, refreshData } from "./data-controller.js";
 import { onLoginClicked } from "./event-controller.js";
-import {
-  createMechanicListView,
-  updateMechanicListView,
-} from "./mechanics-view-controller.js";
-import {
-  createJobDetailView,
-  updateJobDetailView,
-} from "./detail-view-controller.js";
+import { createMechanicListView, updateMechanicListView } from "./mechanics-view-controller.js";
+import { createJobDetailView, updateJobDetailView } from "./detail-view-controller.js";
+import { statusColor } from "./jobs-view-controller.js";
 
 const root = document.querySelector(":root");
 const loginContainer = document.querySelector("#loginContainer");
@@ -99,6 +87,10 @@ export function generateJobsList(selectedMechanic) {
       const li = document.createElement("li");
       const jobCard = document.createElement("job-card");
       jobCard.jobCardDetails = job;
+      const jobStatusColors = statusColor(job.serviceStatus);
+      jobCard.style.setProperty("--job-status-color", jobStatusColors.color);
+      jobCard.style.setProperty("--job-status-bgcolor", jobStatusColors.bgcolor);
+
       li.append(jobCard);
       jobViewElement.append(li);
     });
@@ -220,14 +212,10 @@ export function toggleJobDetail() {
 export function toggleViewPassword() {
   if (viewPasswordElements.button === null) {
     viewPasswordElements.button = document.querySelector("#view-password");
-    viewPasswordElements.input = document.querySelector(
-      "#login-password-input"
-    );
+    viewPasswordElements.input = document.querySelector("#login-password-input");
   }
   viewPasswordElements.button.classList.toggle("view-pwd");
-  viewPasswordElements.input.type = typeCompare(
-    viewPasswordElements.input.type
-  );
+  viewPasswordElements.input.type = typeCompare(viewPasswordElements.input.type);
 }
 
 export function resetSite() {
