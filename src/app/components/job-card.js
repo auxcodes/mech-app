@@ -2,17 +2,23 @@
 class JobCard extends HTMLElement {
   set jobCardDetails(jobCardDetails) {
     this.innerHTML = `
-        <div id=${jobCardDetails.serviceGuid} class="job-card" onclick="onOpenJobDetail('${jobCardDetails.serviceGuid}')">
+        <div id=${
+          jobCardDetails.serviceGuid
+        } class="job-card" onclick="onOpenJobDetail('${
+      jobCardDetails.serviceGuid
+    }')">
             <div class="card-row">
               <span>${jobCardDetails.customerName}</span>
-              <span>${jobCardDetails.tagNumber}</span>
+              <span class="${
+                jobCardDetails.tagNumber ? "job-tag" : ""
+              }">${jobCardDetails.tagNumber.toUpperCase()}</span>
             </div>
             <div class="card-row">
-              <span>${jobCardDetails.serviceTitle}</span>
+              <span>${jobCardDetails.serviceTitle}</span> 
               <span>${jobCardDetails.hoursRequired} hrs</span>
             </div>  
             <div class="card-row">
-              <span>${jobCardDetails.serviceStatus}</span>
+              <span class="job-status">${jobCardDetails.serviceStatus}</span>
             </div>  
         </div>
         `;
