@@ -6,7 +6,7 @@ class JobDetailView extends HTMLElement {
             <div class="job-detail--header"">
             <div class="job-detail--row">
                 <span>${jobDetail.customerFirstName} ${jobDetail.customerLastName}</span>
-                <span class="${jobDetail.tagNumber ? "job-tag" : ""}">${jobDetail.tagNumber}</span>
+                <span class="${jobDetail.tagNumber ? "job-tag" : ""}">${jobDetail.tagNumber.toUpperCase()}</span>
             </div>
             <div class="job-detail--row">
                     <span>Ph: ${jobDetail.customerMobile}</span>
