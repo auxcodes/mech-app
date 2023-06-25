@@ -1,16 +1,16 @@
 // View to display job details
 class JobDetailView extends HTMLElement {
-    set jobDetail(jobDetail) {
-        this.innerHTML = `
+  set jobDetail(jobDetail) {
+    this.innerHTML = `
         <div>
             <div class="job-detail--header"">
             <div class="job-detail--row">
                 <span>${jobDetail.customerFirstName} ${jobDetail.customerLastName}</span>
-                <span>Ph: ${jobDetail.customerMobile}</span>
+                <span class="${jobDetail.tagNumber ? "job-tag" : ""}">${jobDetail.tagNumber}</span>
             </div>
-                <div class="job-detail--row">
-                    <span>Tag: ${jobDetail.tagNumber}</span>
-                    <span>Status: ${jobDetail.serviceStatus}</span>
+            <div class="job-detail--row">
+                    <span>Ph: ${jobDetail.customerMobile}</span>
+                    <span class="job-status">${jobDetail.serviceStatus}</span>
                 </div>
                 <div class="job-detail--row">
                     <span>Bike: ${jobDetail.bikeMake}</span>
@@ -29,7 +29,7 @@ class JobDetailView extends HTMLElement {
             </div>
         </div>
           `;
-    }
+  }
 }
 
 customElements.define("job-detail-view", JobDetailView);

@@ -1,5 +1,6 @@
-import { createHeader, createBackButton } from "./view-controller.js";
 import {} from "../views/job-detail-view.js";
+import { createHeader, createBackButton } from "./view-controller.js";
+import { statusColor } from "./jobs-view-controller.js";
 
 const jobDetailContainer = document.querySelector("#jobDetailContainer");
 const jobDetailElements = {
@@ -43,7 +44,11 @@ export function createJobDetailView() {
 }
 
 export function updateJobDetailView(viewData) {
+  console.log("Update jo detail: ", viewData);
   jobDetailElements["viewElement"].jobDetail = viewData["jobDetail"];
+  const jobStatusColors = statusColor(viewData["jobDetail"].serviceStatus);
+  jobDetailElements["viewElement"].style.setProperty("--job-status-color", jobStatusColors.color);
+  jobDetailElements["viewElement"].style.setProperty("--job-status-bgcolor", jobStatusColors.bgcolor);
   jobDetailElements["header"].headerData = {
     headerText: viewData["headerText"],
     buttonList: [createBackButton({ bid: "jobs", text: "Jobs" })],
