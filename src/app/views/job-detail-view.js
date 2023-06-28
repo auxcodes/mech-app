@@ -9,12 +9,12 @@ class JobDetailView extends HTMLElement {
                 <span class="${jobDetail.tagNumber ? "job-tag" : ""}">${jobDetail.tagNumber.toUpperCase()}</span>
             </div>
             <div class="job-detail--row">
-                    <span>Ph: ${jobDetail.customerMobile}</span>
+                    <span>${jobDetail.customerMobile}</span>
                     <span class="job-status">${jobDetail.serviceStatus}</span>
                 </div>
                 <div class="job-detail--row">
-                    <span>Bike: ${jobDetail.bikeMake}</span>
-                    <span>${jobDetail.bikeName}</span>
+                    <span>${jobDetail.bikeMake} ${jobDetail.bikeName}</span>
+                    <span></span>
                 </div>
             </div>
             <div class="job-detail--body">
