@@ -1,5 +1,6 @@
 const functionURLs = {
   local: "http://localhost:8888/.netlify/functions/",
+  dev: "https://dev.mech.aux.codes/.netlify/functions",
   prod: "https://mech.aux.codes/.netlify/functions",
 };
 const devenv = ["dev", "localhost", "127.0.0.1"];

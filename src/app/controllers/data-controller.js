@@ -1,5 +1,6 @@
 import { onSessionExpired } from "./event-controller.js";
 import { shopData, jobDetail } from "../online-data.js";
+import { getDemoMechanics } from "./demo-data-controller.js";
 
 const shopInfo = { shopName: "" };
 const todaysDate = { date: "" };
@@ -8,9 +9,22 @@ const allJobs = { data: [] };
 const mechanicJobs = { data: [] };
 const displayedJob = { data: {} };
 const request = { data: {} };
+const demoMode = { mode: false };
+
+export function demoModeOn() {
+  demoMode["mode"] = true;
+}
 
 export async function getMechanics(requestData) {
   request["data"] = requestData;
+  console.log("DC - Get Mechanics: ", requestData);
+  if (demoMode["mode"]) {
+    const shopData = getDemoMechanics(requestData);
+    console.log("DC - getMechanics - demoMode", shopData);
+    parseShopData(shopData);
+    console.log("DC - getMechanics - demoMode - mechanics", mechanics.data);
+    return mechanics.data;
+  }
   if (mechanics.data.length === 0) {
     await shopData(requestData)
       .then((response) => {
@@ -19,13 +33,10 @@ export async function getMechanics(requestData) {
           return;
         }
         if (response["data"] !== undefined) {
-          //console.log("DC - getMechanics - shopData", response["msg"]);
+          console.log("DC - getMechanics - shopData", response);
           const shopData = response["data"];
           console.log("DC - Shop data: ", shopData);
-          shopInfo["shopName"] = shopData["shopName"];
-          todaysDate["date"] = shopData[""];
-          filterStaff(Object.values(shopData["mechanics"]));
-          allJobs["data"] = Object.values(shopData["jobsList"]);
+          parseShopData(shopData);
         } else {
           mechanics.data = [
             {
@@ -52,6 +63,14 @@ export async function getMechanics(requestData) {
   return mechanics.data;
 }
 
+export function parseShopData(shopData) {
+  console.log("DC - parseShopData: ", shopData);
+  shopInfo["shopName"] = shopData["shopName"];
+  todaysDate["date"] = shopData[""];
+  filterStaff(Object.values(shopData["mechanics"]));
+  allJobs["data"] = Object.values(shopData["jobsList"]);
+}
+
 export async function refreshData() {
   await shopData(request["data"])
     .then((response) => {
@@ -68,10 +87,7 @@ export async function refreshData() {
 }
 
 export function getJobs(mechGuid) {
-  if (
-    mechanicJobs.data.length === 0 ||
-    mechanicJobs.data["0"].technicianGuid !== mechGuid
-  ) {
+  if (mechanicJobs.data.length === 0 || mechanicJobs.data["0"].technicianGuid !== mechGuid) {
     filterMechJobs(mechGuid, allJobs["data"]);
   }
   return mechanicJobs.data;
@@ -90,16 +106,12 @@ export async function getJobDetailData(jobGuid) {
         return;
       }
       displayedJob["data"] = response["data"];
-      //console.log("DC - displayedJob: ", displayedJob["data"]);
+      console.log("DC - displayedJob: ", displayedJob["data"]);
       if (response["data"]["serviceItems"]) {
-        displayedJob["data"]["siTotal"] = serviceItemsTotal(
-          response["data"]["serviceItems"]
-        );
+        displayedJob["data"]["siTotal"] = serviceItemsTotal(response["data"]["serviceItems"]);
       }
     })
-    .catch((error) =>
-      console.error("DC - Get job detail request failed", error)
-    );
+    .catch((error) => console.error("DC - Get job detail request failed", error));
   return displayedJob["data"];
 }
 
@@ -120,7 +132,7 @@ export function mechanicName(mechId) {
 
 function validSession(sessionData) {
   let sessionExpired = false;
-  //console.log("Valid Session check: ", sessionData);
+  console.log("Valid Session check: ", sessionData);
   if (sessionData["data"]["resultsData"]) {
     const message = sessionData["data"]["resultsData"]["message"];
     sessionExpired = message.includes("Session Token invalid");
@@ -130,10 +142,8 @@ function validSession(sessionData) {
 }
 
 function filterStaff(staffList) {
-  //console.log("DC - Filter staff: ", staffList);
-  const mechs = staffList
-    .filter((staff) => isMechanic(staff))
-    .sort((a, b) => a.orderIndex - b.orderIndex);
+  console.log("DC - Filter staff: ", staffList);
+  const mechs = staffList.filter((staff) => isMechanic(staff)).sort((a, b) => a.orderIndex - b.orderIndex);
   const mechList = mechs.map((mech) => {
     const mechDetails = {
       displayName: mech.displayName,

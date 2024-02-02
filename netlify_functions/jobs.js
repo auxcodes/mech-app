@@ -34,7 +34,7 @@ exports.handler = async (event, context, callback) => {
     try {
       await requestShopData(body)
         .then((response) => {
-          console.log("> Shop data request was successful...", response);
+          console.log("> Shop data request completed...", response);
           callback(null, {
             statusCode: 200,
             responseHeaders,
@@ -77,6 +77,7 @@ exports.handler = async (event, context, callback) => {
 async function requestShopData(requestData) {
   const urlEncoding = new URLSearchParams(requestData["requestData"]);
   shopDataHeader["Cookie"] = requestData["cookie"];
+  console.log("> RequestShopData: ", shopDataHeader["Cookie"]);
   console.log("Shop data request: ", urlEncoding.toString());
   try {
     let shopDataResponse = {};
@@ -87,10 +88,13 @@ async function requestShopData(requestData) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Shop data response: ", data);
-        shopDataResponse = formatData(data["response"]["resultsData"]);
+        console.log("Shop data response: ", data["response"]);
+        shopDataResponse = formatData(data["response"]);
       })
-      .catch((error) => console.error("Job request failed", error));
+      .catch((error) => {
+        console.error("Job request failed", error);
+      });
+    console.log("shopDataResponse", shopDataResponse);
     return shopDataResponse;
   } catch (error) {
     return error;
@@ -98,15 +102,20 @@ async function requestShopData(requestData) {
 }
 
 function formatData(allShopData) {
-  console.log("> Formate Data", allShopData["suburb"]);
-  const formatedData = {
-    shopName: allShopData["suburb"],
-    jobsList: {
-      ...allShopData["itemsScheduled"],
-    },
-    mechanics: {
-      ...allShopData["staffList"],
-    },
-  };
-  return formatedData;
+  console.log("> Formate Data", allShopData);
+  const resultData = allShopData["resultsData"];
+  if (resultData["message"].includes("Session Token invalid")) {
+    return allShopData;
+  } else {
+    const formatedData = {
+      shopName: resultData["suburb"],
+      jobsList: {
+        ...resultData["itemsScheduled"],
+      },
+      mechanics: {
+        ...resultData["staffList"],
+      },
+    };
+    return formatedData;
+  }
 }
