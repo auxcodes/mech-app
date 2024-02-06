@@ -23,7 +23,7 @@ export async function shopData(requestData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      //console.log("Shop Data Request successful!");
+      console.log("OD - Shop Data Request successful!");
       result = data;
     })
     .catch((error) => {
@@ -61,7 +61,37 @@ export async function jobDetail(jobGuid) {
   })
     .then((response) => response.json())
     .then((data) => {
-      //console.log("Job Detail Request successful!");
+      console.log("OD - Job Detail Request successful!");
+      result = data;
+    })
+    .catch((error) => console.error("Job request failed", error));
+  return result;
+}
+
+export async function demoJobDetail(jobGuid) {
+  const data = shopParam["data"]["requestData"];
+  const requestData = {
+    cookie: shopParam["data"]["cookie"],
+    requestData: {
+      uid: 0,
+      lid: 0,
+      sid: jobGuid,
+      requestId: "demo",
+      _: "1683189251809",
+    },
+  };
+
+  let result = {};
+  await fetch(functionUrl() + "/demo-detail", {
+    method: "POST",
+    body: JSON.stringify(requestData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("OD - Job Detail Request successful!");
       result = data;
     })
     .catch((error) => console.error("Job request failed", error));

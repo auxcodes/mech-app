@@ -1,6 +1,6 @@
 import { onSessionExpired } from "./event-controller.js";
 import { shopData, jobDetail } from "../online-data.js";
-import { getDemoMechanics } from "./demo-data-controller.js";
+import { getDemoJobDetail, getDemoMechanics } from "./demo-data-controller.js";
 
 const shopInfo = { shopName: "" };
 const todaysDate = { date: "" };
@@ -99,6 +99,15 @@ export function getJobCardData(jobGuid) {
 
 export async function getJobDetailData(jobGuid) {
   displayedJob["data"] = {};
+  if (demoMode["mode"]) {
+    console.log("DC - getJobDetailData: Demo Mode", jobGuid);
+    await getDemoJobDetail(jobGuid)
+      .then((response) => {
+        displayedJob["data"] = response;
+      })
+      .catch((error) => console.error("DC - Get demo job detail request failed", error));
+    return displayedJob["data"];
+  }
   await jobDetail(jobGuid)
     .then((response) => {
       if (validSession(response)) {
@@ -180,7 +189,7 @@ function filterAllJobs(jobGuid) {
   return jobDetail;
 }
 
-function serviceItemsTotal(serviceItems) {
+export function serviceItemsTotal(serviceItems) {
   let totalHours = 0;
   let totalCost = 0;
   serviceItems.forEach((item) => {
