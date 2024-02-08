@@ -121,6 +121,7 @@ export function generateJobDetail(selectedJob) {
       const totals = {
         guid: "total",
         label: "",
+        quantity: jobData["siTotal"]["quantity"],
         serviceHrsRequired: jobData["siTotal"]["hours"] + " hrs",
         price: jobData["siTotal"]["cost"],
       };

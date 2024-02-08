@@ -3,6 +3,7 @@ class ServiceItem extends HTMLElement {
     this.innerHTML = `
           <div id=${siData.guid} class="service-item">
                 <span>${siData.label}</span>
+                <span>${siData.quantity * 1}</span>
                 <span>${siData.serviceHrsRequired}</span>
                 <span>${"$" + siData.price}</span>
           </div>

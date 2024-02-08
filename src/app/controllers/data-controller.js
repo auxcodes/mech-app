@@ -192,11 +192,13 @@ function filterAllJobs(jobGuid) {
 export function serviceItemsTotal(serviceItems) {
   let totalHours = 0;
   let totalCost = 0;
+  let totalItems = 0;
   serviceItems.forEach((item) => {
     const hours = item["serviceHrsRequired"];
     const cost = item["price"] * item["quantity"];
     totalHours = +hours + +totalHours;
     totalCost = +cost + +totalCost;
+    totalItems = +item["quantity"] + +totalItems;
   });
-  return { hours: totalHours, cost: totalCost };
+  return { quantity: totalItems, hours: totalHours, cost: totalCost };
 }

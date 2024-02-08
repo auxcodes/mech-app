@@ -5,15 +5,15 @@ class JobDetailView extends HTMLElement {
         <div>
             <div class="job-detail--header"">
             <div class="job-detail--row">
-                <span>${jobDetail.customerFirstName} ${jobDetail.customerLastName}</span>
+                <span class="left-col row-padding">${jobDetail.customerFirstName} ${jobDetail.customerLastName}</span>
                 <span class="${jobDetail.tagNumber ? "job-tag" : ""}">${jobDetail.tagNumber.toUpperCase()}</span>
             </div>
             <div class="job-detail--row">
-                    <span>${jobDetail.customerMobile}</span>
+                    <span class="left-col row-padding">${jobDetail.customerMobile}</span>
                     <span class="job-status">${jobDetail.serviceStatus}</span>
                 </div>
                 <div class="job-detail--row">
-                    <span>${jobDetail.bikeMake} ${jobDetail.bikeName}</span>
+                    <span class="left-col row-padding">${jobDetail.bikeMake} ${jobDetail.bikeName}</span>
                     <span></span>
                 </div>
             </div>
