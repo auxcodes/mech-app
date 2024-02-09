@@ -95,7 +95,7 @@ const responseData = {
       bikeName: "Lato",
       bikeMake: "Specialized",
       bookingComments:
-        "Customer want the wheel trued, few spokes are loose.\nAlso the customer done a tubeless conversion at Bayswater and it is leaking sealant from the nipple, install need to be redo as warranty and customer will pay only 50% or contact bayswater to cover it.",
+        "Customer want the wheel trued, few spokes are loose.\n- Also the customer done a tubeless conversion at another store and it is leaking sealant from the nipple\n- Install needs to be redone as warranty and customer will pay only 50%, perhaps call other store to cover costs.",
       customerFirstName: "Ben",
       customerLastName: "Green",
       customerMobile: "0412345678",
@@ -225,7 +225,7 @@ const responseData = {
       bikeName: "Merida eSilex 400 2021",
       bikeMake: "Merida",
       bookingComments:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc.\n- Nulla facilisi.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. \n- Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. \n- Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
       customerFirstName: "James",
       customerLastName: "Eastwood",
       customerMobile: "0412345678",
@@ -283,7 +283,7 @@ const responseData = {
       bikeName: "Siskiu",
       bikeMake: "Polygon",
       bookingComments:
-        "Ultimate Service.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Ultimate Service.\n- Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
       customerFirstName: "Ben",
       customerLastName: "Vandendriesen",
       customerMobile: "0412345678",
@@ -355,7 +355,7 @@ const responseData = {
       bikeName: "",
       bikeMake: "Pedal, Jet, Black",
       bookingComments:
-        "Standard Service.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Standard Service.\n- Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc.\n- Nulla facilisi.",
       customerFirstName: "Musa",
       customerLastName: "De Abreu",
       customerMobile: "0412345678",
@@ -399,7 +399,7 @@ const responseData = {
       bikeName: "n/a",
       bikeMake: "ByK",
       bookingComments:
-        "Accessory Install.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Accessory Install.\n- Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. \n- Nulla facilisi.",
       customerFirstName: "Fiona",
       customerLastName: "Van",
       customerMobile: "0412345678",
@@ -429,7 +429,7 @@ const responseData = {
       bikeName: "Crystal",
       bikeMake: "Apollo",
       bookingComments:
-        "Standard Plus.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Standard Plus.\n- Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
       customerFirstName: "Patrick",
       customerLastName: "Muto",
       customerMobile: "0412345678",
@@ -487,7 +487,7 @@ const responseData = {
       bikeName: "Stinky",
       bikeMake: "Surly",
       bookingComments:
-        "Standard Service.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Nulla nec purus feugiat, molestie ipsum et, consequat nunc. Nulla facilisi.",
+        "Standard Service.\n- Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n- Nulla nec purus feugiat, molestie ipsum et, consequat nunc. \n- Nulla facilisi.",
       customerFirstName: "Doug",
       customerLastName: "Hendry",
       customerMobile: "0412345678",
@@ -531,7 +531,7 @@ const responseData = {
       bikeName: "Scooter",
       bikeMake: "Scooter",
       bookingComments:
-        "Brake lever install on scooter. Customer will drop off the scooter at 10am and pick up at 12pm. Customer will pay cash.",
+        "Brake lever install on scooter. \n- Customer will drop off the scooter at 10am and pick up at 12pm. \n- Customer will pay cash.",
       customerFirstName: "Matt",
       customerLastName: "Song",
       customerMobile: "0412345678",

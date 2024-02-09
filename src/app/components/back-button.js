@@ -1,7 +1,7 @@
 class BackButton extends HTMLElement {
   set buttonConfig(config) {
     this.innerHTML = `
-        <button onclick="onBackClicked('${config.bid}')" class="back-button"></button>
+        <button onclick="onBackClicked('${config.bid}')" class="round-btn back-button"></button>
         `;
   }
 }

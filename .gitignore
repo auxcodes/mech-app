@@ -10,3 +10,5 @@ netlify_functions/.env
 .env
 netlify_functions/package-lock.json
 src/assets/testdata.json
+
+job-details.json
