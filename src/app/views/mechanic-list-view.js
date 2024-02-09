@@ -7,7 +7,7 @@ class MechanicListView extends HTMLElement {
         .map((mech) => {
           return `    
         <li>
-          <button id=${mech.guid} onclick="onOpenJobList('${mech.guid}')" style="--mech-btn-color: ${mech.displayColor}" class="mech-btn" title="Open Job List">${mech.firstName}</button>
+          <button id=${mech.guid} style="--mech-btn-color: ${mech.displayColor}" class="mech-btn" title="Open Job List">${mech.firstName}</button>
         </li>
       `;
         })

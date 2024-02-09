@@ -9,8 +9,6 @@ import {
 import { loginErrorState } from "./user-auth.js";
 import { loginView } from "./controllers/view-controller.js";
 
-window.onLoginClicked = onLoginClicked;
-window.onOpenJobList = onOpenJobList;
 window.onOpenJobDetail = onOpenJobDetail;
 window.onBackClicked = onBackClicked;
 window.onRefreshClicked = onRefreshClicked;

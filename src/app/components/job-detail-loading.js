@@ -4,7 +4,7 @@ class JobDetailLoading extends HTMLElement {
 <div class="job-detail--content"><section-header>
         <header class="section-header">Service Information</header>
         <back-button>
-        <button onclick="onBackClicked('jobs')" class="back-button"></button>
+        <button onclick="onBackClicked('jobs')" class="round-btn back-button"></button>
         </back-button></section-header><job-detail-view id="jobDetailView" class="job-detail-view">
         <div>
             <div class="job-detail--header" "="">

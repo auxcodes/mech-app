@@ -1,5 +1,6 @@
 import { createHeader } from "./view-controller.js";
 import {} from "../views/mechanic-list-view.js";
+import { onOpenJobList } from "./event-controller.js";
 
 const mechListContainer = document.querySelector("#mechanicsListContainer");
 const mechListElements = {
@@ -35,6 +36,15 @@ export function createMechanicListView() {
   mechViewContent.append(mechViewElement);
 }
 
+function addMechanicButtonEvents(buttonContainer) {
+  const mechButtons = buttonContainer.querySelectorAll(".mech-btn");
+  mechButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      onOpenJobList(event.target.id);
+    });
+  });
+}
+
 export function updateMechanicListView(viewData) {
   mechListElements["viewElement"].mechanics = viewData["mechanicList"];
   mechListElements["header"].headerData = {
@@ -42,4 +52,6 @@ export function updateMechanicListView(viewData) {
     buttonList: [],
     currentDate: viewData["currentDate"],
   };
+
+  addMechanicButtonEvents(mechListElements["viewElement"]);
 }
